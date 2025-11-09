@@ -1,0 +1,692 @@
+:root {
+  color-scheme: light;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #f5f5f7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #fdf2ff 0%, #ffffff 50%, #f5f5f7 100%);
+  color: #1f1f29;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.video-frame {
+  position: relative;
+  width: min(90vw, 360px);
+  aspect-ratio: 9 / 16;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 40px 60px rgba(84, 26, 109, 0.25);
+  background: #fff;
+  isolation: isolate;
+  animation: pulse-border var(--duration) linear infinite;
+  --duration: 20s;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.scene-busy {
+  background: linear-gradient(160deg, #ffdde1 0%, #ee9ca7 100%);
+  animation: sceneBusy var(--duration) linear infinite;
+  color: #3b1d3e;
+}
+
+.scene-calm {
+  background: linear-gradient(160deg, #d4fc79 0%, #96e6a1 100%);
+  animation: sceneCalm var(--duration) linear infinite;
+  color: #0b2b22;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+}
+
+.workspace {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.beauty-pro {
+  position: relative;
+  width: 140px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.beauty-pro .hair {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(160deg, #3f1a3d 0%, #603358 100%);
+  border-radius: 60% 60% 40% 40%;
+  position: absolute;
+  top: 0;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+
+.beauty-pro .face {
+  position: absolute;
+  top: 32px;
+  width: 85px;
+  height: 105px;
+  background: #f7d3c7;
+  border-radius: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beauty-pro .eye {
+  width: 10px;
+  height: 10px;
+  background: #2f1230;
+  border-radius: 50%;
+  margin: 0 8px;
+  animation: blink calc(var(--duration) / 10) ease-in-out infinite;
+}
+
+.beauty-pro .mouth {
+  position: absolute;
+  bottom: 18px;
+  width: 32px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-bottom-color: #9a4a62;
+  transform: rotate(10deg);
+  animation: mouthStress var(--duration) linear infinite;
+}
+
+.beauty-pro .hands {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  gap: 36px;
+}
+
+.beauty-pro .hand {
+  width: 24px;
+  height: 60px;
+  background: linear-gradient(160deg, #f5bfae 0%, #f19d8d 100%);
+  border-radius: 18px;
+  animation: handsMove var(--duration) ease-in-out infinite;
+}
+
+.beauty-pro .hand.right {
+  animation-delay: 0.2s;
+}
+
+.client-bed {
+  position: absolute;
+  bottom: 20px;
+  width: 220px;
+  height: 120px;
+  background: linear-gradient(90deg, #ffe4f0 0%, #ffcfe0 100%);
+  border-radius: 60px;
+  box-shadow: 0 20px 30px rgba(160, 30, 70, 0.25);
+}
+
+.client {
+  position: absolute;
+  left: 20px;
+  top: -28px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.client-face {
+  width: 52px;
+  height: 52px;
+  background: #ffe9d6;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.client-body {
+  flex: 1;
+  height: 34px;
+  background: linear-gradient(90deg, #f2a4c3 0%, #f7bfd6 100%);
+  border-radius: 24px;
+}
+
+.phone {
+  width: 120px;
+  height: 220px;
+  border-radius: 26px;
+  background: #101014;
+  padding: 14px;
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 18px;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.busy-phone {
+  animation: phoneShake calc(var(--duration) / 30) ease-in-out infinite;
+}
+
+.phone .screen {
+  flex: 1;
+  background: #171727;
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.notification {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  color: #29132a;
+  transform: translateX(140%);
+  opacity: 0;
+}
+
+.notification strong {
+  font-size: 11px;
+}
+
+.notification span {
+  font-size: 10px;
+}
+
+.notification.n1 {
+  animation: notificationOne var(--duration) ease-in-out infinite;
+}
+
+.notification.n2 {
+  animation: notificationTwo var(--duration) ease-in-out infinite;
+}
+
+.notification.n3 {
+  animation: notificationThree var(--duration) ease-in-out infinite;
+}
+
+.overlay {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.copy-busy {
+  animation: textBusy var(--duration) linear infinite;
+}
+
+.ambient-glow {
+  position: absolute;
+  inset: 10% 15%;
+  border-radius: 32px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 60%);
+  filter: blur(8px);
+  animation: glow var(--duration) ease-in-out infinite;
+}
+
+.calm-phone {
+  position: relative;
+  width: 180px;
+  height: 320px;
+  right: auto;
+  top: auto;
+  animation: phoneFloat var(--duration) ease-in-out infinite;
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #0b2c1d;
+}
+
+.browser-bar .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.browser-bar .red {
+  background: #ff5f56;
+}
+
+.browser-bar .yellow {
+  background: #ffbd2e;
+}
+
+.browser-bar .green {
+  background: #27c93f;
+}
+
+.hero-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #0e3a28;
+  animation: heroFade var(--duration) linear infinite;
+}
+
+.tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #0a6b3d;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.calendar {
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: left;
+  color: #104632;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calendar-header {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.slot {
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(16, 70, 50, 0.08);
+  font-size: 11px;
+  text-align: center;
+}
+
+.slot.booked {
+  background: rgba(12, 121, 68, 0.15);
+  color: #0b7b45;
+  font-weight: 600;
+}
+
+.cta {
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #0ac271 0%, #12e19a 100%);
+  margin-top: auto;
+  cursor: pointer;
+  box-shadow: 0 12px 18px rgba(5, 121, 67, 0.25);
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+}
+
+.copy-calm {
+  position: absolute;
+  bottom: 40px;
+  left: 24px;
+  right: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #083320;
+  text-shadow: 0 6px 20px rgba(255, 255, 255, 0.6);
+  animation: textCalm var(--duration) linear infinite;
+}
+
+.logo-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(8, 51, 32, 0.8);
+  animation: logoFade var(--duration) linear infinite;
+}
+
+@keyframes sceneBusy {
+  0%,
+  48% {
+    opacity: 1;
+    filter: none;
+  }
+  55%,
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes sceneCalm {
+  0%,
+  50% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  58%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes blink {
+  0%,
+  90% {
+    transform: scaleY(1);
+  }
+  93%,
+  96% {
+    transform: scaleY(0.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes mouthStress {
+  0%,
+  48% {
+    transform: rotate(10deg) scaleY(1.3);
+  }
+  55%,
+  100% {
+    transform: rotate(0) scaleY(1);
+  }
+}
+
+@keyframes handsMove {
+  0%,
+  48% {
+    transform: translateY(0);
+  }
+  24% {
+    transform: translateY(6px);
+  }
+  48% {
+    transform: translateY(-4px);
+  }
+  55%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes notificationOne {
+  0% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  6% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  28% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  55%,
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+@keyframes notificationTwo {
+  0%,
+  12% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  18% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  32% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  55%,
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+@keyframes notificationThree {
+  0%,
+  24% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  30% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  44% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  52% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  55%,
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+@keyframes textBusy {
+  0%,
+  48% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  55%,
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  60%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes phoneShake {
+  0%,
+  55% {
+    transform: rotate(-2deg) translateX(-2px);
+  }
+  5% {
+    transform: rotate(2deg) translateX(2px);
+  }
+  10% {
+    transform: rotate(-3deg) translateX(-3px);
+  }
+  15% {
+    transform: rotate(3deg) translateX(3px);
+  }
+  20% {
+    transform: rotate(-2deg) translateX(-1px);
+  }
+  25% {
+    transform: rotate(1deg) translateX(1px);
+  }
+  30% {
+    transform: rotate(-3deg) translateX(-2px);
+  }
+  35% {
+    transform: rotate(3deg) translateX(1px);
+  }
+  40% {
+    transform: rotate(-2deg) translateX(-3px);
+  }
+  45% {
+    transform: rotate(2deg) translateX(2px);
+  }
+  50% {
+    transform: rotate(-1deg) translateX(-1px);
+  }
+  55%,
+  100% {
+    transform: rotate(0) translateX(0);
+  }
+}
+
+@keyframes phoneFloat {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  62%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFade {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  62%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textCalm {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  65%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFade {
+  0%,
+  60% {
+    opacity: 0;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-border {
+  0%,
+  60% {
+    box-shadow: 0 40px 60px rgba(84, 26, 109, 0.25);
+  }
+  80%,
+  100% {
+    box-shadow: 0 40px 60px rgba(28, 102, 70, 0.25);
+  }
+}
